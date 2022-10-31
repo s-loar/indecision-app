@@ -25,6 +25,12 @@ var removeAll = function removeAll() {
   }
 };
 
+var makeDecision = function makeDecision() {
+  var randomNum = Math.floor(Math.random() * app.options.length);
+  var option = app.options[randomNum];
+  alert(option);
+};
+
 var container = document.getElementById("app");
 var root = ReactDOM.createRoot(container);
 
@@ -51,16 +57,10 @@ var render = function render() {
     React.createElement(
       'p',
       null,
-      app.options.length
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', { type: 'text', name: 'option' }),
       React.createElement(
         'button',
-        null,
-        'Add Option'
+        { disabled: app.options.length === 0, onClick: makeDecision },
+        'What should I do?'
       )
     ),
     React.createElement(
@@ -70,6 +70,16 @@ var render = function render() {
         'button',
         { onClick: removeAll },
         'Remove All'
+      )
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
       )
     ),
     React.createElement(
